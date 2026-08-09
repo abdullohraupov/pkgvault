@@ -7,13 +7,13 @@
 
 **PkgVault** is a lightweight, zero-dependency C++17 CLI utility designed to back up and restore explicitly installed system packages across various Linux package managers.
 
-Whether you're hopping distros, setting up a fresh system, or syncing software stacks across multiple machines, PkgVault abstracts package manager differences into a single, clean JSON workflow.
+Whether you're setting up a fresh system after a clean install or syncing software stacks across multiple machines running the same distribution, PkgVault provides a clean, reproducible JSON workflow for package management.
 
 ---
 
 ## ✨ Highlights
 
-- 🚀 **Multi-Distro Support**: Native backends for `apt`, `dnf`, `pacman`, `zypper`, and `xbps`.
+- 🚀 **Multi-Distro Support**: Compatible with `apt`, `dnf`, `pacman`, `zypper`, and `xbps` environments.
 - 🔍 **Explicit Only**: Filters out automatic dependencies (saves only packages you explicitly installed).
 - 🔐 **Safe Execution**: Built-in package name sanitization to prevent shell injection.
 - 📂 **Declarative Backups**: Saves your system state into clean, human-readable JSON files.
@@ -22,13 +22,13 @@ Whether you're hopping distros, setting up a fresh system, or syncing software s
 
 ## 📊 Supported Package Managers
 
-| Manager | Distros | Explicit Listing Method |
-| :--- | :--- | :--- |
-| **`pacman`** | Arch Linux, Manjaro, EndeavourOS | `pacman -Qeq` |
-| **`dnf`** | Fedora, RHEL, Nobara | `rpm -qa --qf '%{NAME}\n'` |
-| **`apt`** | Debian, Ubuntu, Pop!_OS, Mint | `apt-mark showmanual` |
-| **`zypper`** | openSUSE Leap / Tumbleweed | `rpm -qa --qf '%{NAME}\n'` |
-| **`xbps`** | Void Linux | `xbps-query -m` |
+| Manager      | Distros                          | Explicit Listing Method    |
+|:-------------|:---------------------------------|:---------------------------|
+| **`pacman`** | Arch Linux, Manjaro, EndeavourOS | `pacman -Qeq`              |
+| **`dnf`**    | Fedora, RHEL, Nobara             | `rpm -qa --qf '%{NAME}\n'` |
+| **`apt`**    | Debian, Ubuntu, Pop!_OS, Mint    | `apt-mark showmanual`      |
+| **`zypper`** | openSUSE Leap / Tumbleweed       | `rpm -qa --qf '%{NAME}\n'` |
+| **`xbps`**   | Void Linux                       | `xbps-query -m`            |
 
 ---
 
