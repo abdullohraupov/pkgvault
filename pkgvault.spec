@@ -10,7 +10,7 @@ Source0:        %{url}/archive/v%{version}.tar.gz
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
 BuildRequires:  make
-BuildRequires:  json-devel
+BuildRequires:  nlohmann_json-devel
 
 %description
 PkgVault is a command-line utility for saving and loading package lists across different Linux distributions (apt, dnf, pacman, zypper, xbps).
