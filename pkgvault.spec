@@ -31,5 +31,5 @@ PkgVault is a command-line utility for saving and loading package lists across d
 %{_bindir}/pkgvault
 
 %changelog
-* Thu Aug 06 2026 Abdulloh Raupov <abdullohraupov.work@gmail.com> - 1.0
+* Thu Aug 09 2026 Abdulloh Raupov <abdullohraupov.work@gmail.com> - 1.0
 - Initial release
