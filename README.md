@@ -5,7 +5,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
 ![Build](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)
 
-**PkgVault** is a lightweight, zero-dependency C++17 CLI utility designed to back up and restore explicitly installed system packages across various Linux package managers.
+**PkgVault** is a lightweight utility designed to back up and restore explicitly installed system packages across various Linux package managers.
 
 Whether you're setting up a fresh system after a clean install or syncing software stacks across multiple machines running the same distribution, PkgVault provides a clean, reproducible JSON workflow for package management.
 
