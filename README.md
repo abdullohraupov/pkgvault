@@ -3,7 +3,6 @@
 ![C++17](https://img.shields.io/badge/C%2B%2B-17-blue.svg?style=flat-square&logo=cplusplus)
 ![Linux](https://img.shields.io/badge/Platform-Linux-FFD140.svg?style=flat-square&logo=linux&logoColor=black)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
-[![Copr Build Status](https://copr.fedorainfracloud.org/coprs/abdullohraupov/pkgvault/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/abdullohraupov/pkgvault/)
 
 **PkgVault** is a lightweight utility designed to back up and restore explicitly installed system packages across various Linux package managers.
 
