@@ -21,10 +21,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install C++ dependencies
+      - name: Install C++ dependencies and test target packages
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake build-essential ninja-build
+          sudo apt-get install -y cmake build-essential ninja-build clang jq git zsh neovim
 
       - name: Set Compiler (GCC)
         if: matrix.compiler == 'gcc'
@@ -42,12 +42,49 @@ jobs:
         run: |
           cmake -B build \
                 -G Ninja \
-                -DCMAKE_BUILD_TYPE=Release
+                -DCMAKE_BUILD_TYPE=Release \
+                -DBUILD_TESTING=ON
 
       - name: Build Project
         run: |
           cmake --build build --config Release -j$(nproc)
 
-      - name: Run Tests (if CTest configured)
+      - name: Run CTest Suite (Unit Tests)
         run: |
-          ctest --test-dir build --output-on-failure || echo "No tests configured."
+          ctest --test-dir build --output-on-failure
+
+      - name: Integration Test
+        run: |
+          echo "=== 1. Running pkgvault ==="
+
+          ./build/pkgvault --save packages.json
+
+          echo "=== Generated JSON Content ==="
+          cat packages.json
+          echo -e "\n============================"
+
+          echo "=== 2. Validating JSON Syntax ==="
+
+          jq . packages.json > /dev/null || { echo "ERROR: Invalid JSON format!"; exit 1; }
+
+          echo "=== 3. Checking 'packages' array structure ==="
+
+          COUNT=$(jq '.packages | length' packages.json)
+          echo "Found $COUNT installed packages in JSON."
+          if [ "$COUNT" -eq 0 ]; then
+            echo "ERROR: 'packages' array is empty!"
+            exit 1
+          fi
+
+          echo "=== 4. Verifying presence of expected system packages ==="
+          
+          for pkg in "cmake" "git" "zsh"; do
+            if jq -e ".packages | index(\"$pkg\") != null" packages.json > /dev/null; then
+              echo "  [OK] Package '$pkg' correctly detected."
+            else
+              echo "ERROR: Package '$pkg' was installed on system but NOT found in JSON!"
+              exit 1
+            fi
+          done
+
+          echo "All integration checks passed successfully!"

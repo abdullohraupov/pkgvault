@@ -1,9 +1,8 @@
-# 📦 PkgVault
+# PkgVault 📦
 
 ![C++17](https://img.shields.io/badge/C%2B%2B-17-blue.svg?style=flat-square&logo=cplusplus)
 ![Linux](https://img.shields.io/badge/Platform-Linux-FFD140.svg?style=flat-square&logo=linux&logoColor=black)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat-square)](https://www.gnu.org/licenses/gpl-3.0)
-[![Copr Build Status](https://copr.fedorainfracloud.org/coprs/abdullohraupov/pkgvault/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/abdullohraupov/pkgvault/)
 
 **PkgVault** is a lightweight utility designed to back up and restore explicitly installed system packages across various Linux package managers.
 
@@ -11,16 +10,16 @@ Whether you're setting up a fresh system after a clean install or syncing softwa
 
 ---
 
-## ✨ Highlights
+## Highlights ✨
 
-- 🚀 **Multi-Distro Support**: Compatible with `apt`, `dnf`, `pacman`, `zypper`, and `xbps` environments.
-- 🔍 **Explicit Only**: Filters out automatic dependencies (saves only packages you explicitly installed).
-- 🔐 **Safe Execution**: Built-in package name sanitization to prevent shell injection.
-- 📂 **Declarative Backups**: Saves your system state into clean, human-readable JSON files.
+- Multi-Distro Support: Compatible with `apt`, `dnf`, `pacman`, `zypper`, and `xbps` environments.
+- Explicit Only: Filters out automatic dependencies (saves only packages you explicitly installed).
+- Safe Execution: Built-in package name sanitization to prevent shell injection.
+- Declarative Backups: Saves your system state into clean, human-readable JSON files.
 
 ---
 
-## 📊 Supported Package Managers
+## Supported Package Managers 📊
 
 | Manager      | Distros                             |
 |:-------------|:------------------------------------|
@@ -32,9 +31,9 @@ Whether you're setting up a fresh system after a clean install or syncing softwa
 
 ---
 
-## 📦 Installation
+## Installation 📦
 
-### Fedora / RHEL / EPEL / openSuse Leap (via Copr)
+### Fedora / RHEL / openSuse Leap (via Copr)
 
 If you are running Fedora, RHEL, or OpenSuse Leap, you can install `pkgvault` directly from the official Copr repository:
 
@@ -48,7 +47,7 @@ sudo dnf install pkgvault
 
 ---
 
-### 🛠 Building from Source
+### Building from Source 🛠
 
 #### Requirements
 
@@ -73,7 +72,7 @@ sudo cmake --install build
 
 ---
 
-## 📖 Usage
+## Usage 📖
 
 ### Save Installed Packages
 
@@ -110,7 +109,7 @@ Options:
 
 ---
 
-## 📄 Backup Format Example
+## Backup Format Example 📄
 
 The generated `.json` backup file example:
 
@@ -128,6 +127,6 @@ The generated `.json` backup file example:
 
 ---
 
-## 📄 License
+## License 📄
 
-Distributed under the **GNU General Public License v3.0 (GPLv3)**. See [`LICENSE`](https://www.google.com/search?q=LICENSE) for details.
+Distributed under the **GNU General Public License v3.0 (GPLv3)**. See [`LICENSE`](LICENSE) for details.

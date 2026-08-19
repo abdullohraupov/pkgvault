@@ -1,5 +1,5 @@
 Name:           pkgvault
-Version:        1.0
+Version:        1.1
 Release:        1%{?dist}
 Summary:        A minimalist CLI tool to save and restore installed packages
 
