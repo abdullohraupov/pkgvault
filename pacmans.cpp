@@ -52,6 +52,7 @@ namespace
         std::string cmd = (geteuid() == 0) ? "" : "sudo ";
         cmd += base_cmd;
 
+        bool has_valid_pkgs = false;
         for (const auto& [name] : pkgs)
         {
             if (!is_valid_pkg_name(name))
@@ -61,9 +62,13 @@ namespace
             }
 
             cmd += " " + name;
+            has_valid_pkgs = true;
         }
 
-        system(cmd.c_str());
+        if (has_valid_pkgs)
+        {
+            system(cmd.c_str());
+        }
     }
 
     std::vector<package> save_simple_pkgs(const char* cmd)
@@ -88,7 +93,7 @@ namespace
 
 void apt::installPkgs(const std::vector<package>& pkgs)
 {
-    install("apt install -y", pkgs);
+    install("apt-get install -y", pkgs);
 }
 
 std::vector<package> apt::savePkgs()
@@ -106,7 +111,7 @@ void dnf::installPkgs(const std::vector<package>& pkgs)
 
 std::vector<package> dnf::savePkgs()
 {
-    return save_simple_pkgs("rpm -qa --qf '%{NAME}\n' 2>/dev/null");
+    return save_simple_pkgs("dnf repoquery --userinstalled --queryformat '%{name}\n' 2>/dev/null");
 }
 
 
@@ -119,7 +124,7 @@ void pacman::installPkgs(const std::vector<package>& pkgs)
 
 std::vector<package> pacman::savePkgs()
 {
-    return save_simple_pkgs("pacman -Qeq 2>/dev/null");
+    return save_simple_pkgs("pacman -Qqe 2>/dev/null");
 }
 
 
@@ -127,12 +132,12 @@ std::vector<package> pacman::savePkgs()
 
 void zypper::installPkgs(const std::vector<package>& pkgs)
 {
-    install("zypper install -y", pkgs);
+    install("zypper --non-interactive install -y", pkgs);
 }
 
 std::vector<package> zypper::savePkgs()
 {
-    return save_simple_pkgs("rpm -qa --qf '%{NAME}\n' 2>/dev/null");
+    return save_simple_pkgs("zypper search -i -t package 2>/dev/null | awk -F'|' 'NR>4 {print $2}' | tr -d ' '");
 }
 
 
