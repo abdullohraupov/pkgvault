@@ -1,0 +1,65 @@
+name: Release Build
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-packages:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake rpm wget
+
+      - name: Build project with CMake
+        run: |
+          mkdir build && cd build
+          cmake .. -DCMAKE_BUILD_TYPE=Release
+          make -j$(nproc)
+
+      - name: Build .deb and .rpm via CPack
+        run: |
+          cd build
+          cpack -G DEB
+          cpack -G RPM
+
+      - name: Build AppImage
+        run: |
+          mkdir -p AppDir/usr/bin
+          cp build/pkgvault AppDir/usr/bin/
+          
+          cat << 'EOF' > AppDir/pkgvault.desktop
+          [Desktop Entry]
+          Name=PkgVault
+          Exec=pkgvault
+          Icon=utilities-terminal
+          Type=Application
+          Categories=Utility;
+          EOF
+
+          cat << 'EOF' > AppDir/AppRun
+          #!/bin/sh
+          HERE="$(dirname "$(readlink -f "${0}")")"
+          exec "$HERE/usr/bin/pkgvault" "$@"
+          EOF
+          chmod +x AppDir/AppRun
+
+          wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
+          chmod +x appimagetool-x86_64.AppImage
+          ./appimagetool-x86_64.AppImage AppDir PkgVault-x86_64.AppImage
+
+      - name: Upload Release Assets
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            build/*.deb
+            build/*.rpm
+            PkgVault-x86_64.AppImage
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
