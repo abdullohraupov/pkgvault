@@ -16,7 +16,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential cmake rpm wget
-          sudo apt-get install -y libfuse2t64 || sudo apt-get install -y libfuse2
+          sudo add-apt-repository universe
+          sudo apt-get update
+          sudo apt-get install -y libfuse2t64
 
       - name: Build project with CMake
         run: |
