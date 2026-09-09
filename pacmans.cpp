@@ -18,7 +18,7 @@ namespace
     {
         if (name.empty() || name.length() > 128) return false;
 
-        return std::all_of(name.begin(), name.end(), [](unsigned char c) {
+        return std::all_of(name.begin(), name.end(), [](const unsigned char c) {
             return std::isalnum(c) || c == '_' || c == '.' || c == '+' || c == '-' || c == '@';
         });
     }
