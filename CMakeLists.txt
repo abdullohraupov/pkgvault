@@ -15,7 +15,7 @@ if(NOT nlohmann_json_FOUND)
     include(FetchContent)
     FetchContent_Declare(
             json
-            URL JSONLIB_GIT_URL
+            URL ${JSONLIB_GIT_URL}
             DOWNLOAD_EXTRACT_TIMESTAMP TRUE
     )
     FetchContent_GetProperties(json)
