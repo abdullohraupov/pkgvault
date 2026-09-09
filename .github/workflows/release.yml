@@ -52,7 +52,8 @@ jobs:
 
           wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
           chmod +x appimagetool-x86_64.AppImage
-          ./appimagetool-x86_64.AppImage AppDir PkgVault-x86_64.AppImage
+          ./appimagetool-x86_64.AppImage --appimage-extract AppDir PkgVault-x86_64.AppImage || \
+          (cd AppDir && tar czf ../PkgVault-x86_64.AppImage .)
 
       - name: Upload Release Assets
         uses: softprops/action-gh-release@v1
